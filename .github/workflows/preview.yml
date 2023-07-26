@@ -34,7 +34,7 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           start: npm run start
-          wait-on: 'http://localhost:8811'
+          wait-on: 'http://localhost:8811/home'
         env:
           PORT: '8811'
 
