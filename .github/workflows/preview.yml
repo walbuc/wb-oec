@@ -33,6 +33,7 @@ jobs:
           browser: chrome
 
   Deploy-Preview:
+    needs: Cypress
     name: ⚫️ Preview 🤯
     runs-on: ubuntu-latest
     steps:
