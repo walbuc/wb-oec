@@ -29,9 +29,11 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           start: npm run start
-          wait-on: 'http://localhost:3000'
+          wait-on: '0.0.0.0:3000'
+          browser: chrome
 
   Deploy-Preview:
+    name: ⚫️ Preview 🤯
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
