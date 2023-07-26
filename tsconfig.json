@@ -1,4 +1,11 @@
 {
+
+ "ts-node": {
+   "compilerOptions": {
+    "module": "es2015",
+     "moduleResolution": "node"
+   }
+},
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -20,9 +27,17 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+        "@/components/*": ["./components/*"],
+        "@/hooks/*": ["./hooks/*"],
+        "@/lib/*": ["./lib/*"],
+        "@/styles/*": ["./styles/*"],
+        "@/prisma/*": ["./prisma/*"],
+        "@/assets/*": ["./assets/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "cypress/tsconfig.json", "cypress/e2e/app.cy.ts"],
   "exclude": ["node_modules"]
 }
+
+
