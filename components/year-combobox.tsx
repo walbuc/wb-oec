@@ -24,19 +24,14 @@ function getYear(inputValue: string = '') {
   }
 }
 
-type Param = Record<'year', string>
-
 export default function YearCombobox({year, ...props}: BaseOptions) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-
   const createQueryString = useCallback(
     (name: string, value: string) => {
-      const yearParam: Param = {year: searchParams.get('year') ?? ''}
-      const params = new URLSearchParams(yearParam)
+      const params = new URLSearchParams(searchParams.toString())
       params.set(name, value)
-
       return params.toString()
     },
     [searchParams],
