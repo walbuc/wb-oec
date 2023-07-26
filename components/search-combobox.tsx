@@ -60,8 +60,7 @@ export function SearchCombobox<Item>({
     }
   }
 
-  //const displayMenu = cb.isOpen && items.length > 0
-  const displayMenu = true
+  const displayMenu = cb.isOpen && items.length > 0
 
   const menuClassName =
     'absolute z-10 mt-4 min-w-[448px] max-h-[336px] bg-white text-night-400 shadow-lg rounded-3xl w-full overflow-scroll divide-solid divide-night-100 divide-y'
