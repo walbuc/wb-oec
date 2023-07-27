@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import {PropsWithChildren} from 'react'
 import '@/styles/globals.css'
-import {ButtonLink, Button} from '@/components/forms'
-//import {logout} from '../actions'
-import Logout from './Logout'
+import {Spacer} from '@/components/spacer'
+
 export default function DashboardRootLayout({children}: PropsWithChildren) {
   return (
     <html lang="en" className={'dark h-full'}>
@@ -15,12 +14,20 @@ export default function DashboardRootLayout({children}: PropsWithChildren) {
               <div className="font-light text-accent-yellow">OEC</div>
               <div className="font-bold text-accent-yellow">Data</div>
             </Link>
-            <div className="flex items-center gap-10">
-              <Logout />
-            </div>
           </nav>
         </header>
-        {children}
+        <div className="flex min-h-full flex-col justify-center pb-32 pt-20">
+          <div className="mx-auto w-full max-w-md">
+            <div className="flex flex-col gap-3 text-center">
+              <h1 className="text-h1">Let's start your journey!</h1>
+              <p className="text-body-md text-night-200">
+                Please enter your details.
+              </p>
+            </div>
+            <Spacer size="xs" />
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   )
