@@ -16,15 +16,24 @@
 // Import commands.js using ES2015 syntax:
 import '@testing-library/cypress/add-commands'
 import './commands'
+import {userBuilder} from './generate'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+type User = {email: string; password: string}
 
 declare global {
   namespace Cypress {
     interface Chainable {
       assertHome(): Chainable<Element>
-      assertLoggedInAs(user: any): Chainable<Element>
+      assertLoggedInAs(user: {
+        email: string
+        password: string
+      }): Chainable<Element>
+      login(user: User): Chainable<User>
+      createUser(overrides?: User): Chainable<User>
+      loginAsNewUser(): Chainable<Element>
       //login(email: string, password: string): Chainable<void>
       //drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
@@ -33,11 +42,42 @@ declare global {
   }
 }
 
+Cypress.Commands.add(
+  'createUser',
+  (overrides: {email: string; password: string}) => {
+    const user = userBuilder(overrides)
+    return cy
+      .request({
+        url: 'http://localhost:3000/api/register',
+        method: 'POST',
+        body: user,
+      })
+      .then(() => user)
+  },
+)
+
+Cypress.Commands.add('login', user => {
+  return cy
+    .request({
+      url: 'http://localhost:3000/api/signin',
+      method: 'POST',
+      body: user,
+    })
+    .then(() => user)
+})
+
+Cypress.Commands.add('loginAsNewUser', () => {
+  cy.createUser().then(user => {
+    cy.login(user)
+  })
+})
+
+//asserts
+
 Cypress.Commands.add('assertHome', () => {
-  cy.url().should('eq', `${Cypress.config().baseUrl}/`)
+  cy.url().should('eq', `${Cypress.config().baseUrl}/home`)
 })
 
 Cypress.Commands.add('assertLoggedInAs', user => {
-  cy.window().its('localStorage.token').should('be.a', 'string')
-  cy.findByTestId('username-display').should('have.text', user.username)
+  cy.findByTestId('username-display').should('have.text', user.email)
 })
