@@ -14,14 +14,23 @@ function getError(error: string | {error: string}) {
   return typeof error === 'string' ? error : error.error
 }
 
+interface CustomElements extends HTMLFormControlsCollection {
+  email: HTMLInputElement
+  password: HTMLInputElement
+}
+
+interface CustomForm extends HTMLFormElement {
+  readonly elements: CustomElements
+}
+
 export default function InlineRegister() {
   const {data, error, run, status} = useAsync()
   const router = useRouter()
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: React.FormEvent<CustomForm>) {
     event.preventDefault()
-    const email = event.target.email.value
-    const password = event.target.password.value
+    const email = event.currentTarget.email.value
+    const password = event.currentTarget.password.value
     run(register({email, password})).then(() => {
       router.push('/home')
     })
