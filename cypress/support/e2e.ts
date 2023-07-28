@@ -42,19 +42,16 @@ declare global {
   }
 }
 
-Cypress.Commands.add(
-  'createUser',
-  (overrides: {email: string; password: string}) => {
-    const user: User = userBuilder(overrides)
-    return cy
-      .request({
-        url: 'http://localhost:3000/api/register',
-        method: 'POST',
-        body: user,
-      })
-      .then(() => user)
-  },
-)
+Cypress.Commands.add('createUser', (overrides?: User = ) => {
+  const user: User = userBuilder(overrides)
+  return cy
+    .request({
+      url: 'http://localhost:3000/api/register',
+      method: 'POST',
+      body: user,
+    })
+    .then(() => user)
+})
 
 Cypress.Commands.add('login', user => {
   return cy
