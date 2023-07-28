@@ -1,15 +1,10 @@
 import {getTradeData} from '@/lib/client'
+import type {Trade} from '@/lib/client'
 import Link from 'next/link'
 import TreeMap from '@/components/tree-map'
 import {Spacer} from '@/components/spacer'
-import Exports, {type Export} from './exports'
+import Exports from './exports'
 import {Suspense} from 'react'
-
-export type Trade = {
-  ['HS2 ID']: number
-  ['HS2']: string
-  ['Trade Value']: number
-}
 
 type TradeProps = {
   id: string

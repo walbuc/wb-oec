@@ -1,5 +1,4 @@
 import {getCountries} from '@/lib/client'
-import {CountryItem} from '@/components/country-combobox'
 import CountrySearchCombobox from '@/components/country-combobox'
 import {delay} from '@/lib/async'
 
@@ -10,7 +9,7 @@ export default async function ComponentTEst() {
   return (
     <CountrySearchCombobox
       placeholder="Search for a country"
-      itemsInitial={items.data as CountryItem[]}
+      itemsInitial={items}
     />
   )
 }
