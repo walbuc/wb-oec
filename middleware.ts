@@ -8,7 +8,7 @@ const PUBLIC_FILE = /\.(.*)$/
 const verifyJWT = async (jwt: string) => {
   const {payload} = await jwtVerify(
     jwt,
-    new TextEncoder().encode(process.env.JWT_SECRET),
+    new TextEncoder().encode('somesecretevaluejwt'),
   )
 
   return payload
@@ -27,7 +27,7 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.next()
   }
   //we validate here if we have alrearya token in the coockie session
-  const jwt = req.cookies.get(__cookie_custom_name)
+  const jwt = req.cookies.get('__cookie_custom_name')
   // go away
   if (!jwt) {
     req.nextUrl.pathname = '/signin'
