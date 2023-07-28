@@ -42,7 +42,7 @@ declare global {
   }
 }
 
-Cypress.Commands.add('createUser', (overrides?: User = ) => {
+Cypress.Commands.add('createUser', (overrides?: User) => {
   const user: User = userBuilder(overrides)
   return cy
     .request({
