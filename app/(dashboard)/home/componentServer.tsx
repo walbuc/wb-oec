@@ -10,7 +10,7 @@ export default async function ComponentTEst() {
   return (
     <CountrySearchCombobox
       placeholder="Search for a country"
-      itemsInitial={items.data as CountryItem[]}
+      itemsInitial={items}
     />
   )
 }
