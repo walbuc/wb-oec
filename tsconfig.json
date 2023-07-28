@@ -38,7 +38,7 @@
         "@/assets/*": ["./assets/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "cypress/tsconfig.json", "cypress/e2e/app.cy.ts", "cypress/support/generate.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "cypress/tsconfig.json", "cypress/e2e/app.cy.ts", "cypress/support/generate.ts"],
   "exclude": ["node_modules"]
 }
 
