@@ -68,7 +68,7 @@ async function getTradeData({
   )
 }
 
-async function register(user: User) {
+async function register(user: Pick<User, 'password' | 'email'>) {
   return fetcher({
     url: '/api/register',
     method: 'POST',
@@ -77,7 +77,7 @@ async function register(user: User) {
   })
 }
 
-async function signin(user: User) {
+async function signin(user: Pick<User, 'password' | 'email'>) {
   return fetcher({
     url: '/api/signin',
     method: 'POST',
