@@ -17,10 +17,11 @@
 import '@testing-library/cypress/add-commands'
 import './commands'
 import {userBuilder} from './generate'
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-type User = {email: string; password: string}
+export type User = {email: string; password: string}
 
 declare global {
   namespace Cypress {
