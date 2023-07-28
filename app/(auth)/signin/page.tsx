@@ -4,10 +4,7 @@ import {useAsync} from '@/hooks/useAsync'
 import Link from 'next/link'
 import {signin} from '@/lib/client'
 import {useRouter} from 'next/navigation'
-
-function getError(error: string | {error: string}) {
-  return typeof error === 'string' ? error : error.error
-}
+import {ListOfErrors} from '@/components/forms'
 
 interface CustomElements extends HTMLFormControlsCollection {
   email: HTMLInputElement
@@ -18,11 +15,31 @@ interface CustomForm extends HTMLFormElement {
   readonly elements: CustomElements
 }
 
-export default function InlineLogin() {
-  const {data, error, run, status} = useAsync()
-  const router = useRouter()
+function getError(error: string | {error: string}) {
+  return typeof error === 'string' ? error : error.error
+}
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+function getFieldsErrors(error: any): {
+  email: ListOfErrors
+  password: ListOfErrors
+} {
+  if (error && error.errors) {
+    if (error.errors.fieldErrors) {
+      return {
+        email: error.errors.fieldErrors.email,
+        password: error.errors.fieldErrors.password,
+      }
+    }
+  }
+  return {email: [], password: []}
+}
+
+export default function InlineLogin() {
+  const {error, run, status} = useAsync()
+  const router = useRouter()
+  const fields = getFieldsErrors(error)
+
+  function handleSubmit(event: React.FormEvent<CustomForm>) {
     event.preventDefault()
     const email = event.currentTarget.email.value
     const password = event.currentTarget.password.value
@@ -38,6 +55,7 @@ export default function InlineLogin() {
               name: 'email',
               autoComplete: 'email',
             }}
+            errors={fields.email}
           />
 
           <Field
@@ -47,6 +65,7 @@ export default function InlineLogin() {
               autoComplete: 'password',
               type: 'password',
             }}
+            errors={fields.password}
           />
           {error && getError(error)}
           <div className="flex items-center justify-between gap-6 pt-3">

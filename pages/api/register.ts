@@ -2,13 +2,28 @@ import {NextApiRequest, NextApiResponse} from 'next'
 import {db} from '@/lib/db'
 import {createJWT, hashPassword} from '@/lib/auth'
 import {serialize} from 'cookie'
+import {z} from 'zod'
+import {passwordSchema, emailSchema} from '@/lib/user-validation'
+
+export const RegisterFormSchema = z.object({
+  email: emailSchema,
+  password: passwordSchema,
+})
 
 export default async function register(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
   if (req.method === 'POST') {
-    // prisma schema already checks if user is in database and errors
+    const {email, password} = req.body
+    const result = RegisterFormSchema.safeParse({email, password})
+    if (!result.success) {
+      res.status(400)
+      return res.json({
+        errors: result.error.flatten(),
+      })
+    }
+
     const user = await db.user.create({
       data: {
         email: req.body.email,

@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import {SignJWT, jwtVerify} from 'jose'
 import {db} from './db'
 import type {User} from '@prisma/client'
-import type {RequestCookies} from 'next/dist/compiled/@edge-runtime/cookies'
+import {ReadonlyRequestCookies} from 'next/dist/server/web/spec-extension/adapters/request-cookies'
 
 // Sign it
 export const createJWT = (user: User) => {
@@ -28,14 +28,14 @@ export const validateJWT = async (jwt: string) => {
 }
 
 // Getting the JWT from cookies:
-export const getUserFromCookie = async (cookies: RequestCookies) => {
+export const getUserFromCookie = async (cookies: ReadonlyRequestCookies) => {
   const jwt = cookies.get(process.env.COOKIE_NAME!)
   // by the time here we will  have a jwt token. no nee to validate
   const {id} = await validateJWT(jwt!.value)
 
   const user = await db.user.findUnique({
     where: {
-      id: id as string,
+      id: id,
     },
   })
 

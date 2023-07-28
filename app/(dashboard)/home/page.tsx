@@ -7,7 +7,6 @@ export default function Home({
 }: {
   searchParams: {[key: string]: string | string[] | undefined}
 }) {
-  console.log(searchParams)
   return (
     <div className="flex-1">
       <Spacer size="2xl" />
