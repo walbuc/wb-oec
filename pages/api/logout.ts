@@ -9,7 +9,7 @@ export default async function logout(
 ) {
   res.setHeader(
     'Set-Cookie',
-    serialize(process.env.COOKIE_NAME, '', {
+    serialize(process.env.COOKIE_NAME!, '', {
       httpOnly: true,
       path: '/',
       maxAge: 60 * 60 * 24 * 7,

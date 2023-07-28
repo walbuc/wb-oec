@@ -29,7 +29,7 @@ export const validateJWT = async (jwt: string) => {
 
 // Getting the JWT from cookies:
 export const getUserFromCookie = async (cookies: RequestCookies) => {
-  const jwt = cookies.get(process.env.COOKIE_NAME)
+  const jwt = cookies.get(process.env.COOKIE_NAME!)
   // by the time here we will  have a jwt token. no nee to validate
   const {id} = await validateJWT(jwt!.value)
 
