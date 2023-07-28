@@ -22,7 +22,7 @@ jobs:
         ports:
           - 5432:5432
     env:
-      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/deployment-example-vercel
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/wb-oec
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.11.0
