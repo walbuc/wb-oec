@@ -5,7 +5,7 @@ interface Props {}
 function Arrow(props: Props) {
   const {} = props
 
-  return arrow
+  return 'arrow'
 }
 
 export default Arrow
