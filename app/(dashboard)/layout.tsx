@@ -16,16 +16,17 @@ export default function DashboardRootLayout({children}: PropsWithChildren) {
               <div className="font-light text-accent-yellow">OEC</div>
               <div className="font-bold text-accent-yellow">Data</div>
             </Link>
-            <div className="flex flex-1 grow justify-center">
-              <Suspense fallback={<GreetingsSkeleton />}>
-                <Greetings />
-              </Suspense>
-            </div>
+
             <div className="flex items-center gap-10">
               <Logout />
             </div>
           </nav>
         </header>
+        <div className="flex  justify-center">
+          <Suspense fallback={<GreetingsSkeleton />}>
+            <Greetings />
+          </Suspense>
+        </div>
         {children}
       </body>
     </html>

@@ -41,7 +41,7 @@ export default function CountrySearchCombobox({...props}: BaseOptions) {
       renderItemInList={item => (
         <div className="flex items-center gap-4">
           {item['EN Label']}
-          <span className="rounded-full bg-accent-yellow px-4 py-2 text-xs text-night-700">
+          <span className="rounded-full  bg-accent-yellow px-4 py-2 text-xs text-night-700">
             {item.ID}
           </span>
         </div>

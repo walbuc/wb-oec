@@ -31,7 +31,7 @@ export default function ProjectPage({params, searchParams}: ProjectPageProps) {
           <h1 className="text-h1 tracking-wide">National Trade Data</h1>
         </div>
         <Spacer size="sm" />
-        <div className="mx-auto w-[90vw] max-w-3xl">
+        <div className="mx-auto w-[90vw]">
           <YearCombobox itemsInitial={items} year={year} />
         </div>
         <Spacer size="sm" />
