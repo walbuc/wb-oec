@@ -27,7 +27,7 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.next()
   }
   //we validate here if we have alrearya token in the coockie session
-  const jwt = req.cookies.get(process.env.COOKIE_NAME!)
+  const jwt = req.cookies.get(__cookie_custom_name)
   // go away
   if (!jwt) {
     req.nextUrl.pathname = '/signin'
