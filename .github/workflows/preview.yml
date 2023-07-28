@@ -52,7 +52,7 @@ jobs:
           start: npm run start
           wait-on: 'http://localhost:3000/home'
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/deployment-example-vercel
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/wb-oec
   Deploy-Preview:
     name: ⚫️ Preview 🤯
     needs: Cypress
