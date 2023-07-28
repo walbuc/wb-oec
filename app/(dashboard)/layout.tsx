@@ -3,7 +3,7 @@ import {PropsWithChildren, Suspense} from 'react'
 import '@/styles/globals.css'
 import GreetingsSkeleton from '@/components/greetingsSkeleton'
 import Greetings from '@/components/greetings'
-import Logout from '@/app/(dashboard)/logout'
+import Logout from './logout-btn'
 
 export default function DashboardRootLayout({children}: PropsWithChildren) {
   return (
