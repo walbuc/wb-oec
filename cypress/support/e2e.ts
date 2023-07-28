@@ -17,7 +17,6 @@
 import '@testing-library/cypress/add-commands'
 import './commands'
 import {userBuilder} from './generate'
-
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
