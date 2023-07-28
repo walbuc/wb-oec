@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import clsx from 'clsx'
+import {useId} from 'react'
+import styles from './forms.module.css'
 
 export function getButtonClassName({
   size,
@@ -31,6 +33,22 @@ export function getButtonClassName({
   return className
 }
 
+export type ListOfErrors = Array<string | null | undefined> | null | undefined
+
+export function ErrorList({id, errors}: {errors?: ListOfErrors; id: string}) {
+  const errorsToRender = errors?.filter(Boolean)
+  if (!errorsToRender?.length) return null
+  return (
+    <ul id={id} className="space-y-1">
+      {errorsToRender.map(e => (
+        <li key={e} className="text-[10px] text-accent-red">
+          {e}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 export function ButtonLink({
   size,
   variant,
@@ -39,4 +57,67 @@ export function ButtonLink({
   Parameters<typeof getButtonClassName>[0]) {
   // eslint-disable-next-line jsx-a11y/anchor-has-content
   return <Link {...props} className={getButtonClassName({size, variant})} />
+}
+
+export function Button({
+  size,
+  variant,
+  status = 'idle',
+  ...props
+}: React.ComponentPropsWithoutRef<'button'> &
+  Parameters<typeof getButtonClassName>[0] & {
+    status?: 'pending' | 'success' | 'error' | 'idle'
+  }) {
+  const companion = {
+    pending: <span className="inline-block animate-spin">🌀</span>,
+    success: <span>✅</span>,
+    error: <span>❌</span>,
+    idle: null,
+  }[status]
+  return (
+    <button
+      {...props}
+      className={clsx(
+        props.className,
+        getButtonClassName({size, variant}),
+        'flex justify-center gap-4',
+      )}
+    >
+      <div>{props.children}</div>
+      {companion}
+    </button>
+  )
+}
+
+export function Field({
+  labelProps,
+  inputProps,
+  errors,
+  className,
+}: {
+  labelProps: Omit<JSX.IntrinsicElements['label'], 'className'>
+  inputProps: Omit<JSX.IntrinsicElements['input'], 'className'>
+  errors?: ListOfErrors
+  className?: string
+}) {
+  const fallbackId = useId()
+  const id = inputProps.id ?? fallbackId
+  const errorId = errors?.length ? `${id}-error` : undefined
+  return (
+    <div className={clsx(styles.field, className)}>
+      <input
+        id={id}
+        aria-invalid={errorId ? true : undefined}
+        aria-describedby={errorId}
+        placeholder=" "
+        {...inputProps}
+        className="h-16 w-full rounded-lg border border-night-400 bg-night-700 px-4 pt-4 text-body-xs caret-white outline-none focus:border-accent-purple disabled:bg-night-400"
+      />
+      {/* the label comes after the input so we can use the sibling selector in the CSS to give us animated label control in CSS only */}
+      <label htmlFor={id} {...labelProps} />
+      <div className="px-4 pb-3 pt-1">
+        {errorId ? <ErrorList id={errorId} errors={errors} /> : null}
+      </div>
+    </div>
+  )
 }
