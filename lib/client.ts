@@ -38,7 +38,10 @@ async function getCountries(): Promise<Country[]> {
   return fetcher({
     url: `${API_URL}members?cube=trade_i_baci_a_92&level=Country&locale=en`,
     method: 'GET',
-  })
+  }).then(
+    res => res.data,
+    err => Promise.reject(new Error(err)),
+  )
 }
 
 // https://oec.world/olap-proxy/data.jsonrecords?Importer+Country=sachl&Year=2020&cube=trade_i_baci_a_92&drilldowns=HS2&measures=Trade+Value&token=6e4305fa8187405a83a49c15de8dac1e

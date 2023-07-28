@@ -1,5 +1,4 @@
 import {getCountries} from '@/lib/client'
-import {CountryItem} from '@/components/country-combobox'
 import CountrySearchCombobox from '@/components/country-combobox'
 import {delay} from '@/lib/async'
 
