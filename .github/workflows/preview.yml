@@ -7,8 +7,40 @@ on:
     branches-ignore:
       - main
 jobs:
+  Cypress:
+    name: ⚫️ Cypress
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+        with:
+          useLockFile: false
+
+      - name: 🛠 Setup Database
+        run: npx prisma migrate reset --force
+
+      - name: 🔨 Build
+        run: npm run build
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm run start
+          wait-on: 'http://localhost:3000/home'
   Deploy-Preview:
     name: ⚫️ Preview 🤯
+    needs: Cypress
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
