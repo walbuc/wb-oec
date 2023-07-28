@@ -1,10 +1,9 @@
 import Link from 'next/link'
 import {PropsWithChildren, Suspense} from 'react'
 import '@/styles/globals.css'
-import Logout from './logout'
-
 import GreetingsSkeleton from '@/components/greetingsSkeleton'
 import Greetings from '@/components/greetings'
+import Logout from '@/app/(dashboard)/logout'
 
 export default function DashboardRootLayout({children}: PropsWithChildren) {
   return (

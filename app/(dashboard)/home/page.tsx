@@ -1,6 +1,6 @@
 import {Spacer} from '@/components/spacer'
 import {Suspense} from 'react'
-import ComponentTEst from './componentServer'
+import Countries from './countries'
 
 export default function Home({
   searchParams,
@@ -20,7 +20,7 @@ export default function Home({
         <Spacer size="lg" />
         <div className="container m-auto mt-12">
           <Suspense fallback="Loading data...">
-            <ComponentTEst />
+            <Countries />
           </Suspense>
         </div>
       </main>
