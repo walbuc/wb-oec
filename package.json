@@ -12,7 +12,8 @@
     "test:e2e:run": "start-server-and-test http://localhost:3000 cy:run",
     "test:e2e:dev": "start-server-and-test dev http://localhost:3000 cy:open",
     "cy:run": "cypress run",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
     "@prisma/client": "^5.0.0",

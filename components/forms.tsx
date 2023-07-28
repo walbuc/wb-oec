@@ -55,7 +55,6 @@ export function ButtonLink({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'> &
   Parameters<typeof getButtonClassName>[0]) {
-  // eslint-disable-next-line jsx-a11y/anchor-has-content
   return <Link {...props} className={getButtonClassName({size, variant})} />
 }
 
