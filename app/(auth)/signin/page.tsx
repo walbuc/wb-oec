@@ -48,17 +48,20 @@ function getFieldsErrors(error?: FormErrors): {
 }
 
 export default function InlineLogin() {
-  const {error, run, status} = useAsync()
+  const {error, run, status, reset} = useAsync()
   const router = useRouter()
   const fields = getFieldsErrors(error)
   const formError = getFormError(error)
 
   function handleSubmit(event: React.FormEvent<CustomForm>) {
-    event.preventDefault()
-    const email = event.currentTarget.email.value
-    const password = event.currentTarget.password.value
-    run(signin({email, password})).then(() => router.push('/home'))
+    if (!error) {
+      event.preventDefault()
+      const email = event.currentTarget.email.value
+      const password = event.currentTarget.password.value
+      run(signin({email, password})).then(() => router.push('/home'))
+    }
   }
+
   return (
     <div>
       <div className="mx-auto w-full max-w-md px-8">
@@ -82,7 +85,7 @@ export default function InlineLogin() {
             errors={fields.password}
           />
           {formError}
-          <div className="flex items-center justify-between gap-6 pt-3">
+          <div className="flex flex-col items-center justify-between gap-6 pt-3">
             <Button
               className="w-full"
               size="md"
@@ -93,6 +96,11 @@ export default function InlineLogin() {
             >
               Log in
             </Button>
+            {error && (
+              <Button variant="secondary" size="md" onClick={reset}>
+                Reset
+              </Button>
+            )}
           </div>
         </form>
         <div className="flex items-center justify-center gap-2 pt-6">
