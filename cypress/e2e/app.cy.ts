@@ -10,6 +10,16 @@ describe('Home Navigation ', () => {
     })
   })
 
+  it('should display user email', () => {
+    cy.loginAsNewUser().then(user => {
+      cy.visit('/home')
+      cy.findByTestId('user-display').should(
+        'have.text',
+        `Hello, ${user.email}`,
+      )
+    })
+  })
+
   it('should render combobox for authenticated user', () => {
     cy.loginAsNewUser().then(user => {
       cy.visit('/home')

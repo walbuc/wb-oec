@@ -15,11 +15,24 @@ interface CustomForm extends HTMLFormElement {
   readonly elements: CustomElements
 }
 
-function getError(error: string | {error: string}) {
-  return typeof error === 'string' ? error : error.error
+function getFormError(error?: FormError) {
+  return typeof error === 'string' ? error : error && error.error
 }
 
-function getFieldsErrors(error: any): {
+type FormError = string | {error: string}
+
+type FieldErrors = {
+  errors?: {
+    fieldErrors?: {
+      email?: ListOfErrors
+      password?: ListOfErrors
+    }
+  }
+}
+
+type FormErrors = FieldErrors & FormError
+
+function getFieldsErrors(error?: FormErrors): {
   email: ListOfErrors
   password: ListOfErrors
 } {
@@ -38,6 +51,7 @@ export default function InlineLogin() {
   const {error, run, status} = useAsync()
   const router = useRouter()
   const fields = getFieldsErrors(error)
+  const formError = getFormError(error)
 
   function handleSubmit(event: React.FormEvent<CustomForm>) {
     event.preventDefault()
@@ -67,7 +81,7 @@ export default function InlineLogin() {
             }}
             errors={fields.password}
           />
-          {error && getError(error)}
+          {formError}
           <div className="flex items-center justify-between gap-6 pt-3">
             <Button
               className="w-full"

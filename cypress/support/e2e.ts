@@ -33,7 +33,7 @@ declare global {
       }): Chainable<Element>
       login(user: User): Chainable<User>
       createUser(overrides?: User): Chainable<User>
-      loginAsNewUser(): Chainable<Element>
+      loginAsNewUser(): Chainable<User>
       //login(email: string, password: string): Chainable<void>
       //drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
@@ -64,8 +64,8 @@ Cypress.Commands.add('login', user => {
 })
 
 Cypress.Commands.add('loginAsNewUser', () => {
-  cy.createUser().then(user => {
-    cy.login(user)
+  return cy.createUser().then(user => {
+    return cy.login(user)
   })
 })
 

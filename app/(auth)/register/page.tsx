@@ -5,10 +5,6 @@ import {register} from '@/lib/client'
 import {useRouter} from 'next/navigation'
 import {ListOfErrors} from '@/components/forms'
 
-function getError(error: string | {error: string}) {
-  return typeof error === 'string' ? error : error.error
-}
-
 interface CustomElements extends HTMLFormControlsCollection {
   email: HTMLInputElement
   password: HTMLInputElement
@@ -18,7 +14,24 @@ interface CustomForm extends HTMLFormElement {
   readonly elements: CustomElements
 }
 
-function getFieldsErrors(error: any): {
+function getFormError(error?: FormError) {
+  return typeof error === 'string' ? error : error && error.error
+}
+
+type FormError = string | {error: string}
+
+type FieldErrors = {
+  errors?: {
+    fieldErrors?: {
+      email?: ListOfErrors
+      password?: ListOfErrors
+    }
+  }
+}
+
+type FormErrors = FieldErrors & FormError
+
+function getFieldsErrors(error?: FormErrors): {
   email: ListOfErrors
   password: ListOfErrors
 } {
@@ -36,6 +49,7 @@ function getFieldsErrors(error: any): {
 export default function InlineRegister() {
   const {error, run, status} = useAsync()
   const fields = getFieldsErrors(error)
+  const formError = getFormError(error)
   const router = useRouter()
 
   function handleSubmit(event: React.FormEvent<CustomForm>) {
@@ -67,7 +81,7 @@ export default function InlineRegister() {
             }}
             errors={fields.password}
           />
-          {error && getError(error)}
+          {formError}
           <div className="flex items-center justify-between gap-6 pt-3">
             <Button
               className="w-full"
