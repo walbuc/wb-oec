@@ -8,7 +8,7 @@ function AuthRootLayout({children}: PropsWithChildren) {
       <body className="flex h-full flex-col justify-between bg-slate-800 text-white">
         <header className="container mx-auto py-6">
           <nav className="flex justify-between">
-            <Link href={'/'}>
+            <Link href={'/home'}>
               <div className="font-light text-accent-yellow">OEC</div>
               <div className="font-bold text-accent-yellow">Data</div>
             </Link>

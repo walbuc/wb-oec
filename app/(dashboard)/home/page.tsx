@@ -9,7 +9,7 @@ export default function Home({
 }) {
   return (
     <div className="flex-1">
-      <Spacer size="xl" />
+      <Spacer size="lg" />
       <main>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-body-lg text-night-200">Explore the universe</p>
