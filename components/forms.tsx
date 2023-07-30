@@ -62,10 +62,12 @@ export function Button({
   size,
   variant,
   status = 'idle',
+  onErrorClick,
   ...props
 }: React.ComponentPropsWithoutRef<'button'> &
   Parameters<typeof getButtonClassName>[0] & {
     status?: 'pending' | 'success' | 'error' | 'idle'
+    onErrorClick?: () => void
   }) {
   const companion = {
     pending: <span className="inline-block animate-spin">🌀</span>,

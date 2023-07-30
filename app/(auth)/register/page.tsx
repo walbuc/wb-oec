@@ -47,7 +47,7 @@ function getFieldsErrors(error?: FormErrors): {
 }
 
 export default function InlineRegister() {
-  const {error, run, status} = useAsync()
+  const {error, run, status, reset} = useAsync()
   const fields = getFieldsErrors(error)
   const formError = getFormError(error)
   const router = useRouter()
@@ -93,6 +93,11 @@ export default function InlineRegister() {
             >
               Create an account
             </Button>
+            {error && (
+              <Button variant="secondary" size="md" onClick={reset}>
+                Reset
+              </Button>
+            )}
           </div>
         </form>
       </div>
