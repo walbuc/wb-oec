@@ -11,6 +11,8 @@
 This app has been deployed to Vercel cloud platform using CI/CD with GitHub
 Actions. The project has development/preview and production workflow.
 
+We use the Different Pages / Navigation Layout option.
+
 Dev setup
 
 ```sh
