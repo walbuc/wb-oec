@@ -38,11 +38,18 @@ export default function CountrySearchCombobox({...props}: BaseOptions) {
       itemToKey={item => item.ID}
       itemToString={item => item?.['EN Label'] ?? ''}
       additionalSearchParams={null}
-      renderItemInList={item => (
-        <div className="flex items-center gap-4">
-          {item['EN Label']}
+      renderItemInList={country => (
+        <div
+          className="flex items-center gap-4"
+          onMouseEnter={() =>
+            router.prefetch(
+              `country/${country?.ID}?name=${country?.['EN Label']}`,
+            )
+          }
+        >
+          {country['EN Label']}
           <span className="rounded-full  bg-accent-yellow px-4 py-2 text-xs text-night-700">
-            {item.ID}
+            {country.ID}
           </span>
         </div>
       )}
