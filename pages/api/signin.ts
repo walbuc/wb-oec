@@ -31,7 +31,7 @@ export default async function signin(
 
     if (!user) {
       res.status(401)
-      res.json({error: 'Invalid login'})
+      res.json({error: 'User does not exist'})
       return
     }
 
@@ -51,7 +51,7 @@ export default async function signin(
       res.json({})
     } else {
       res.status(401)
-      res.json({error: 'Invalid login'})
+      res.json({error: 'Invalid login credentials'})
     }
   } else {
     res.status(402)

@@ -13,7 +13,9 @@ const Greetings = async () => {
   return (
     <div>
       <div className="mx-auto max-w-3xl text-center">
-        <p className="text-body-md text-night-200">Hello, {user?.email}</p>
+        <p className="text-body-md text-night-200" data-testid="user-display">
+          Hello, {user?.email}
+        </p>
       </div>
       <h4 className="text-body-md text-gray-400">
         Check your daily automated reports
