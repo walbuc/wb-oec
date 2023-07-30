@@ -34,7 +34,7 @@ export default async function Trade({id, name, year}: TradeProps) {
           <Link href="/home">Back</Link>
         </div>
       </div>
-      <Spacer size="xs" />
+      <Spacer size="4xs" />
       <div className="mx-auto max-w-3xl text-center">
         <p className="text-body-lg text-night-200">Imports</p>
       </div>

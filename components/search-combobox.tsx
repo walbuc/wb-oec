@@ -63,10 +63,10 @@ export function SearchCombobox<Item>({
   const displayMenu = cb.isOpen && items.length > 0
 
   const menuClassName =
-    'absolute z-10 mt-4 min-w-[448px] max-h-[336px] bg-white text-night-400 shadow-lg rounded-3xl w-full overflow-scroll divide-solid divide-night-100 divide-y'
+    'absolute z-10 mt-4  min-w-[448px] max-h-[336px] bg-white text-night-400 shadow-lg rounded-3xl w-full overflow-scroll divide-solid divide-night-100 divide-y'
 
   return (
-    <div className="relative">
+    <div className="relative mx-4 sm:mx-8 lg:mx-24">
       <div className="group relative">
         <label
           htmlFor={id}

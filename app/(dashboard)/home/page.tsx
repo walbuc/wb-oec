@@ -1,16 +1,15 @@
 import {Spacer} from '@/components/spacer'
 import {Suspense} from 'react'
-import ComponentTEst from './componentServer'
+import Countries from './countries'
 
 export default function Home({
   searchParams,
 }: {
   searchParams: {[key: string]: string | string[] | undefined}
 }) {
-  console.log(searchParams)
   return (
     <div className="flex-1">
-      <Spacer size="2xl" />
+      <Spacer size="xl" />
       <main>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-body-lg text-night-200">Explore the universe</p>
@@ -18,10 +17,10 @@ export default function Home({
             Find trade data in outer space
           </h1>
         </div>
-        <Spacer size="lg" />
+        <Spacer size="sm" />
         <div className="container m-auto mt-12">
           <Suspense fallback="Loading data...">
-            <ComponentTEst />
+            <Countries />
           </Suspense>
         </div>
       </main>

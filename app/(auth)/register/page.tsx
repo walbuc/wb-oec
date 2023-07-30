@@ -1,14 +1,9 @@
 'use client'
-import {
-  Button,
-  Field,
-  //getFieldsFromSchema,
-  //preprocessFormData,
-} from '@/components/forms'
+import {Button, Field} from '@/components/forms'
 import {useAsync} from '@/hooks/useAsync'
 import {register} from '@/lib/client'
-
 import {useRouter} from 'next/navigation'
+import {ListOfErrors} from '@/components/forms'
 
 function getError(error: string | {error: string}) {
   return typeof error === 'string' ? error : error.error
@@ -23,8 +18,24 @@ interface CustomForm extends HTMLFormElement {
   readonly elements: CustomElements
 }
 
+function getFieldsErrors(error: any): {
+  email: ListOfErrors
+  password: ListOfErrors
+} {
+  if (error && error.errors) {
+    if (error.errors.fieldErrors) {
+      return {
+        email: error.errors.fieldErrors.email,
+        password: error.errors.fieldErrors.password,
+      }
+    }
+  }
+  return {email: [], password: []}
+}
+
 export default function InlineRegister() {
-  const {data, error, run, status} = useAsync()
+  const {error, run, status} = useAsync()
+  const fields = getFieldsErrors(error)
   const router = useRouter()
 
   function handleSubmit(event: React.FormEvent<CustomForm>) {
@@ -45,6 +56,7 @@ export default function InlineRegister() {
               name: 'email',
               autoComplete: 'email',
             }}
+            errors={fields.email}
           />
           <Field
             labelProps={{children: 'Password'}}
@@ -53,6 +65,7 @@ export default function InlineRegister() {
               autoComplete: 'password',
               type: 'password',
             }}
+            errors={fields.password}
           />
           {error && getError(error)}
           <div className="flex items-center justify-between gap-6 pt-3">

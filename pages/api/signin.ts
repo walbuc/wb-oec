@@ -2,12 +2,27 @@ import {NextApiRequest, NextApiResponse} from 'next'
 import {db} from '@/lib/db'
 import {comparePasswords, createJWT} from '@/lib/auth'
 import {serialize} from 'cookie'
+import {z} from 'zod'
+import {passwordSchema, emailSchema} from '@/lib/user-validation'
+
+export const LoginFormSchema = z.object({
+  email: emailSchema,
+  password: passwordSchema,
+})
 
 export default async function signin(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
   if (req.method === 'POST') {
+    const {email, password} = req.body
+    const result = LoginFormSchema.safeParse({email, password})
+    if (!result.success) {
+      res.status(400)
+      return res.json({
+        errors: result.error.flatten(),
+      })
+    }
     const user = await db.user.findUnique({
       where: {
         email: req.body.email,

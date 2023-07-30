@@ -1,6 +1,6 @@
 'use client'
 import {logout} from '../actions'
-import {ButtonLink, Button} from '@/components/forms'
+import {Button} from '@/components/forms'
 import {useTransition} from 'react'
 
 function Logout() {

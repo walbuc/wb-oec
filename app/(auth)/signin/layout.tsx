@@ -24,7 +24,6 @@ export default function DashboardRootLayout({children}: PropsWithChildren) {
                 Please enter your details.
               </p>
             </div>
-            <Spacer size="xs" />
             {children}
           </div>
         </div>
