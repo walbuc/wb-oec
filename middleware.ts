@@ -27,7 +27,6 @@ export default async function middleware(req: NextRequest) {
   }
 
   const jwt = req.cookies.get('__cookie_custom_name')
-  console.log(jwt)
 
   if (!jwt) {
     req.nextUrl.pathname = '/signin'
@@ -36,6 +35,10 @@ export default async function middleware(req: NextRequest) {
 
   try {
     await verifyJWT(jwt.value)
+    if (pathname === '/') {
+      req.nextUrl.pathname = '/home'
+      return NextResponse.redirect(req.nextUrl)
+    }
     return NextResponse.next()
   } catch (e) {
     req.nextUrl.pathname = '/signin'

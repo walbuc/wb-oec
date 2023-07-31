@@ -1,10 +1,10 @@
 'use client'
-import {Button, Field} from '@/components/forms'
+import {Button, ButtonLink, Field} from '@/components/forms'
 import {useAsync} from '@/hooks/useAsync'
 import Link from 'next/link'
 import {signin} from '@/lib/client'
 import {ListOfErrors} from '@/components/forms'
-import {redirect, useRouter} from 'next/navigation'
+import {useRouter} from 'next/navigation'
 import {useEffect} from 'react'
 
 interface CustomElements extends HTMLFormControlsCollection {
@@ -52,6 +52,7 @@ export default function InlineLogin() {
   const {error, run, status, reset} = useAsync()
   const router = useRouter()
   const fields = getFieldsErrors(error)
+  const success = status === 'success'
   const formError = getFormError(error)
 
   useEffect(() => {
@@ -104,6 +105,11 @@ export default function InlineLogin() {
             <Button variant="secondary" size="md" onClick={reset}>
               Reset
             </Button>
+          )}
+          {success && (
+            <ButtonLink size="sm" variant="primary" href="/home">
+              Go to Dashboard!
+            </ButtonLink>
           )}
         </div>
       </form>
