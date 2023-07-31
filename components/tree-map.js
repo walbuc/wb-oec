@@ -11,7 +11,7 @@ export default function TreeMap({data = []}) {
   })
 
   const config = {
-    groupBy: 'id',
+    groupBy: 'name',
     data: total,
     size: d => d.value,
   }
