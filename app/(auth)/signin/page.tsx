@@ -5,7 +5,8 @@ import Link from 'next/link'
 import {signin} from '@/lib/client'
 
 import {ListOfErrors} from '@/components/forms'
-import {useRouter} from 'next/navigation'
+import {redirect, useRouter} from 'next/navigation'
+import {useEffect} from 'react'
 
 interface CustomElements extends HTMLFormControlsCollection {
   email: HTMLInputElement
@@ -54,15 +55,17 @@ export default function InlineLogin() {
   const fields = getFieldsErrors(error)
   const formError = getFormError(error)
 
+  useEffect(() => {
+    if (status === 'success') {
+      router.push('/home')
+    }
+  }, [status, router])
+
   async function handleSubmit(event: React.FormEvent<CustomForm>) {
     event.preventDefault()
     const email = event.currentTarget.email.value
     const password = event.currentTarget.password.value
-    await run(signin({email, password}))
-    setTimeout(() => {
-      console.log('me llama')
-      router.push('/home')
-    }, 1000)
+    run(signin({email, password}))
   }
 
   return (

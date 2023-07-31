@@ -1,7 +1,7 @@
 'use client'
 import {clsx} from 'clsx'
 import {useCombobox} from 'downshift'
-import {useState, useId} from 'react'
+import {useState} from 'react'
 import {Spinner} from './spinner'
 
 // This is a Polymorphic Component
@@ -36,11 +36,9 @@ export function SearchCombobox<Item>({
   defaultSelectedItem,
   showSpinner = false,
 }: SearchComboboxProps<Item>) {
-  const id = useId()
   const [items, setItems] = useState(itemsInitial || [])
 
   const cb = useCombobox<Item>({
-    id,
     onSelectedItemChange: ({selectedItem}) => onChange(selectedItem),
     onInputValueChange: ({inputValue}) =>
       setItems(itemsInitial.filter(filter(inputValue))),
@@ -73,14 +71,14 @@ export function SearchCombobox<Item>({
     <div className="relative mx-4 sm:mx-8 lg:mx-24">
       <div className="group relative">
         <label
-          htmlFor={id}
+          //htmlFor={}
           className="absolute left-8 top-5 text-xs text-white group-focus-within:text-black"
         >
           {label}
         </label>
         <input
           className="h-[88px] w-full rounded-full bg-night-500 pl-8 pr-5 pt-8 text-body-xs caret-black outline-none placeholder:text-night-300 focus:border-accent-purple focus:bg-white focus:text-night-500 focus:placeholder:text-night-500"
-          {...cb.getInputProps({id, placeholder})}
+          {...cb.getInputProps({placeholder})}
         />
         <div className="absolute right-4 top-[44px]">
           <Spinner showSpinner={showSpinner} />

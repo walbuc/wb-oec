@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import clsx from 'clsx'
-import {useId} from 'react'
 import styles from './forms.module.css'
 
 export function getButtonClassName({
@@ -35,7 +34,7 @@ export function getButtonClassName({
 
 export type ListOfErrors = Array<string | null | undefined> | null | undefined
 
-export function ErrorList({id, errors}: {errors?: ListOfErrors; id: string}) {
+export function ErrorList({id, errors}: {errors?: ListOfErrors; id?: string}) {
   const errorsToRender = errors?.filter(Boolean)
   if (!errorsToRender?.length) return null
   return (
@@ -101,23 +100,24 @@ export function Field({
   errors?: ListOfErrors
   className?: string
 }) {
-  const fallbackId = useId()
-  const id = inputProps.id ?? fallbackId
-  const errorId = errors?.length ? `${id}-error` : undefined
+  // const fallbackId = useId()
+  // const id = inputProps.id ?? fallbackId
+  // const errorId = errors?.length ? `${id}-error` : undefined
   return (
     <div className={clsx(styles.field, className)}>
       <input
-        id={id}
-        aria-invalid={errorId ? true : undefined}
-        aria-describedby={errorId}
+        //id={id}
+        //aria-invalid={errorId ? true : undefined}
+        //aria-describedby={errorId}
         placeholder=" "
         {...inputProps}
         className="h-16 w-full rounded-lg border border-night-400 bg-night-700 px-4 pt-4 text-body-xs caret-white outline-none focus:border-accent-purple disabled:bg-night-400"
       />
       {/* the label comes after the input so we can use the sibling selector in the CSS to give us animated label control in CSS only */}
-      <label htmlFor={id} {...labelProps} />
+
+      <label {...labelProps} />
       <div className="px-4 pb-3 pt-1">
-        {errorId ? <ErrorList id={errorId} errors={errors} /> : null}
+        {errors?.length ? <ErrorList errors={errors} /> : null}
       </div>
     </div>
   )
