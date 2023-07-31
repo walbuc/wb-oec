@@ -1,11 +1,9 @@
 'use client'
 import {Button, Field} from '@/components/forms'
 import {useAsync} from '@/hooks/useAsync'
-import Link from 'next/link'
-import {signin} from '@/lib/client'
-
-import {ListOfErrors} from '@/components/forms'
+import {register} from '@/lib/client'
 import {useRouter} from 'next/navigation'
+import {ListOfErrors} from '@/components/forms'
 
 interface CustomElements extends HTMLFormControlsCollection {
   email: HTMLInputElement
@@ -48,23 +46,19 @@ function getFieldsErrors(error?: FormErrors): {
   return {email: [], password: []}
 }
 
-export default function InlineLogin() {
+export default function InlineRegister() {
   const {error, run, status, reset} = useAsync()
-  const router = useRouter()
   const fields = getFieldsErrors(error)
   const formError = getFormError(error)
+  const router = useRouter()
 
   async function handleSubmit(event: React.FormEvent<CustomForm>) {
     event.preventDefault()
     const email = event.currentTarget.email.value
     const password = event.currentTarget.password.value
-    await run(signin({email, password}))
-    setTimeout(() => {
-      console.log('me llama')
-      router.push('/home')
-    }, 1000)
+    await run(register({email, password}))
+    router.push('/home')
   }
-
   return (
     <div>
       <div className="mx-auto w-full max-w-md px-8">
@@ -77,7 +71,6 @@ export default function InlineLogin() {
             }}
             errors={fields.email}
           />
-
           <Field
             labelProps={{children: 'Password'}}
             inputProps={{
@@ -88,7 +81,7 @@ export default function InlineLogin() {
             errors={fields.password}
           />
           {formError}
-          <div className="flex flex-col items-center justify-between gap-6 pt-3">
+          <div className="flex items-center justify-between gap-6 pt-3">
             <Button
               className="w-full"
               size="md"
@@ -97,7 +90,7 @@ export default function InlineLogin() {
               type="submit"
               disabled={status !== 'idle'}
             >
-              Log in
+              Create an account
             </Button>
             {error && (
               <Button variant="secondary" size="md" onClick={reset}>
@@ -106,10 +99,6 @@ export default function InlineLogin() {
             )}
           </div>
         </form>
-        <div className="flex items-center justify-center gap-2 pt-6">
-          <span className="text-night-200">New here?</span>
-          <Link href="/register">Create an account</Link>
-        </div>
       </div>
     </div>
   )

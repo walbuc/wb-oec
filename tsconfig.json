@@ -1,5 +1,4 @@
 {
-
  "ts-node": {
    "compilerOptions": {
     "module": "es2015",
@@ -21,6 +20,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": true,
     "plugins": [
       {
         "name": "next"
@@ -33,10 +34,11 @@
         "@/lib/*": ["./lib/*"],
         "@/styles/*": ["./styles/*"],
         "@/prisma/*": ["./prisma/*"],
-        "@/assets/*": ["./assets/*"]
+        "@/assets/*": ["./assets/*"],
+        "@/app/*": ["./app/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "cypress/tsconfig.json", "cypress/e2e/app.cy.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "cypress/tsconfig.json", "cypress/e2e/app.cy.ts", "cypress/support/generate.ts"],
   "exclude": ["node_modules"]
 }
 

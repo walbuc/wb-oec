@@ -23,20 +23,19 @@ export default function ProjectPage({params, searchParams}: ProjectPageProps) {
   }
 
   return (
-    <div className="flex-1">
-      <Spacer size="lg" />
+    <div className="mt-12 flex-1">
       <main>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-body-lg text-night-200">Explore the universe</p>
           <h1 className="text-h1 tracking-wide">National Trade Data</h1>
         </div>
         <Spacer size="sm" />
-        <div className="mx-auto w-[90vw] max-w-3xl">
+        <div className="mx-auto w-[80vw]">
           <YearCombobox itemsInitial={items} year={year} />
         </div>
         <Spacer size="sm" />
-        <div className="container m-auto mt-12">
-          <Suspense fallback="Loading trade data...">
+        <div className="container m-auto">
+          <Suspense fallback="Loading Trade Data...">
             <Trade id={params.id} name={name} year={year} />
           </Suspense>
         </div>

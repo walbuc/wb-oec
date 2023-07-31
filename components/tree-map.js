@@ -2,7 +2,6 @@
 import {Treemap} from 'd3plus-react'
 
 export default function TreeMap({data = []}) {
-  console.log(data)
   const total = data.map(a => {
     return {
       id: a['HS2 ID'],
@@ -12,7 +11,7 @@ export default function TreeMap({data = []}) {
   })
 
   const config = {
-    groupBy: 'id',
+    groupBy: 'name',
     data: total,
     size: d => d.value,
   }

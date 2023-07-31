@@ -1,34 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# OEC-Data
 
-## Getting Started
+## _Browse trade data in outer space_
 
-First, run the development server:
+## Production url
 
-```bash
+[OEC-Data Deploy, Click Me!](https://oec.vercel.app/)
+
+## Summary
+
+This app has been deployed to Vercel cloud platform using CI/CD with GitHub
+Actions. The project has development/preview and production workflow.
+
+We use the Different Pages / Navigation Layout option.
+
+Dev setup
+
+```sh
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tech Stack:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Typescript.
+- Next js (with App Router).
+- Tailwind css.
+- Downshift for combobox implementation.
+- Cypress & React Testing Library for e2e testing.
+- Postgres Database / Railway.com
+- Prisma as ORM
+- GitHub actions for CI/CD.
+- Vercel for hosting preview / production deployment. Middlware edge functions
+  and serverless apis.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Features
 
-## Learn More
+The main goal of this proyect is not only implement the requested features, but
+also provide a real workflow for softwate development and a _solid architecture_
+that will scale for real.
 
-To learn more about Next.js, take a look at the following resources:
+This is the way (🎖) I like to work getting deep confidence through testing
+strategies. Static analysis & type safety with Typescript, besides intellisense
+provides autocompletion.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Some patterns like custom hooks and polymorphic components with Ts where
+implemented to demo strategies to solve common problems in larger codebases.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Bonus Features!
 
-## Deploy on Vercel
+Besides applying the requirements expressed in the document, I took this project
+as an opportunity to extend my knowlede of Next js and it's newish App Router
+and explore all the capabilities that this new framework design exposes to
+developers. So, some other features came out through the development process.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Authentication thorugh jwt stored in cookies.
+- Middelware functions
+- API's serverless.
+- Sign In / Register forms.
+- e2e testing with cypress.
+- Form validation with zod.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Cheers!
