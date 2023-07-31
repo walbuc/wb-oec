@@ -59,7 +59,7 @@ export default function InlineLogin() {
       const email = event.currentTarget.email.value
       const password = event.currentTarget.password.value
       await run(signin({email, password}))
-      router.push('/home')
+      setTimeout(() => router.push('/home'), 1000)
     }
   }
 
