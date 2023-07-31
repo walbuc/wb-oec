@@ -104,6 +104,7 @@ export function Field({
   return (
     <div className={clsx(styles.field, className)}>
       <input
+        id={inputProps.name}
         placeholder=" "
         {...inputProps}
         className="h-16 w-full rounded-lg border border-night-400 bg-night-700 px-4 pt-4 text-body-xs caret-white outline-none focus:border-accent-purple disabled:bg-night-400"
