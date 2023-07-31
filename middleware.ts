@@ -10,7 +10,6 @@ const verifyJWT = async (jwt: string) => {
     jwt,
     new TextEncoder().encode('somesecretevaluejwt'),
   )
-
   return payload
 }
 
