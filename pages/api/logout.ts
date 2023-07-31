@@ -1,6 +1,5 @@
 import {NextApiRequest, NextApiResponse} from 'next'
 import {db} from '@/lib/db'
-import {comparePasswords, createJWT} from '@/lib/auth'
 import {serialize} from 'cookie'
 
 export default async function logout(
@@ -11,11 +10,10 @@ export default async function logout(
     'Set-Cookie',
     serialize(process.env.COOKIE_NAME!, '', {
       httpOnly: true,
-      path: '/',
+      path: '/home',
       maxAge: 60 * 60 * 24 * 7,
     }),
   )
-
   res.status(201)
   res.end()
 }
