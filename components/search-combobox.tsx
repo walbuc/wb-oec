@@ -2,6 +2,7 @@
 import {clsx} from 'clsx'
 import {useCombobox} from 'downshift'
 import {useState, useId} from 'react'
+import {Spinner} from './spinner'
 
 // This is a Polymorphic Component
 export type SearchComboboxProps<Item> = {
@@ -17,6 +18,7 @@ export type SearchComboboxProps<Item> = {
   itemsInitial: Item[]
   filter: (input: string | undefined) => (country: Item) => boolean | '' | null
   defaultSelectedItem?: Item
+  showSpinner?: boolean
 }
 
 export function SearchCombobox<Item>({
@@ -32,6 +34,7 @@ export function SearchCombobox<Item>({
   itemsInitial,
   filter,
   defaultSelectedItem,
+  showSpinner = false,
 }: SearchComboboxProps<Item>) {
   const id = useId()
   const [items, setItems] = useState(itemsInitial || [])
@@ -46,7 +49,8 @@ export function SearchCombobox<Item>({
     itemToString,
     defaultSelectedItem,
   })
-  //verrr
+
+  //poc
   const searchParams = new URLSearchParams()
   searchParams.set('query', cb.inputValue)
 
@@ -78,6 +82,9 @@ export function SearchCombobox<Item>({
           className="h-[88px] w-full rounded-full bg-night-500 pl-8 pr-5 pt-8 text-body-xs caret-black outline-none placeholder:text-night-300 focus:border-accent-purple focus:bg-white focus:text-night-500 focus:placeholder:text-night-500"
           {...cb.getInputProps({id, placeholder})}
         />
+        <div className="absolute right-4 top-[44px]">
+          <Spinner showSpinner={showSpinner} />
+        </div>
       </div>
       <ul
         {...cb.getMenuProps({

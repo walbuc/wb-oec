@@ -9,7 +9,7 @@ export type CountryItem = {
 
 export type BaseOptions = Pick<
   SearchComboboxProps<CountryItem>,
-  'selectedItem' | 'exclude' | 'placeholder' | 'itemsInitial'
+  'selectedItem' | 'exclude' | 'placeholder' | 'itemsInitial' | 'showSpinner'
 >
 // TS is Awesome
 function getCountryFilter(inputValue: string = '') {
@@ -24,7 +24,7 @@ function getCountryFilter(inputValue: string = '') {
   }
 }
 
-export default function CountrySearchCombobox({...props}: BaseOptions) {
+export default function CountrySearchCombobox(props: BaseOptions) {
   const router = useRouter()
 
   return (
