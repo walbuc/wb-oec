@@ -34,7 +34,7 @@ export default function ProjectPage({params, searchParams}: ProjectPageProps) {
           <YearCombobox itemsInitial={items} year={year} />
         </div>
         <Spacer size="sm" />
-        <div className="container m-auto ">
+        <div className="container m-auto">
           <Suspense fallback="Loading Trade Data...">
             <Trade id={params.id} name={name} year={year} />
           </Suspense>

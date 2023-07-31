@@ -10,7 +10,7 @@ async function logout() {
     expires: new Date('2016-10-05'),
     path: '/',
   })
-  redirect('/signin')
+  return Promise.resolve()
 }
 
 export {logout}
