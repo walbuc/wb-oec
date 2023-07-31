@@ -14,5 +14,5 @@ export default async function logout(
     }),
   )
   res.status(201)
-  res.end()
+  res.json({})
 }
