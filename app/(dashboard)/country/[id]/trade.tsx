@@ -9,11 +9,11 @@ import {Suspense} from 'react'
 type TradeProps = {
   id: string
   name: string
-  year: string | undefined
+  year?: string
 }
 
 export default async function Trade({id, name, year}: TradeProps) {
-  // Parallec execution
+  // Parallel execution
   const importsPromise: Promise<Trade[]> = getTradeData({
     type: 'Importer',
     id,
@@ -46,10 +46,8 @@ export default async function Trade({id, name, year}: TradeProps) {
           <p className="text-body-lg text-night-200">Exports</p>
         </div>
         <Spacer size="3xs" />
-        {/* <div className="max-w-3xl"> */}
         <Exports promise={exportsPromise} />
       </Suspense>
-      {/* </div> */}
     </div>
   )
 }

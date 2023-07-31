@@ -1,6 +1,6 @@
 function GreetingsSkeleton() {
   return (
-    <div className="w-full max-w-2xl">
+    <div className="h-10 w-full max-w-2xl">
       <div className="flex animate-pulse space-x-2">
         <div className="h-10 w-10 rounded-full bg-gray-300"></div>
         <div className="flex-1 space-y-6 py-1">

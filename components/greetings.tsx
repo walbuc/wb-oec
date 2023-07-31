@@ -11,7 +11,7 @@ async function getData() {
 const Greetings = async () => {
   const user = await getData()
   return (
-    <div>
+    <div className="h-10">
       <div className="mx-auto max-w-3xl text-center">
         <p className="text-body-md text-night-200" data-testid="user-display">
           Hello, {user?.email}
