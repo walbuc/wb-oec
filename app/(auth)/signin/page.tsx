@@ -3,8 +3,9 @@ import {Button, Field} from '@/components/forms'
 import {useAsync} from '@/hooks/useAsync'
 import Link from 'next/link'
 import {signin} from '@/lib/client'
-import {useRouter} from 'next/navigation'
+
 import {ListOfErrors} from '@/components/forms'
+import {useRouter} from 'next/navigation'
 
 interface CustomElements extends HTMLFormControlsCollection {
   email: HTMLInputElement
@@ -54,12 +55,15 @@ export default function InlineLogin() {
   const formError = getFormError(error)
 
   async function handleSubmit(event: React.FormEvent<CustomForm>) {
+    event.preventDefault()
     if (!error) {
-      event.preventDefault()
       const email = event.currentTarget.email.value
       const password = event.currentTarget.password.value
       await run(signin({email, password}))
-      setTimeout(() => router.push('/home'), 1000)
+      setTimeout(() => {
+        console.log('me llama')
+        router.push('/home')
+      }, 1000)
     }
   }
 

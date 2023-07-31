@@ -89,4 +89,11 @@ async function signin(user: Pick<User, 'password' | 'email'>) {
   })
 }
 
-export {fetcher, getCountries, getTradeData, signin, register}
+async function logout() {
+  return fetcher({
+    url: '/api/logout',
+    method: 'GET',
+  })
+}
+
+export {fetcher, getCountries, getTradeData, signin, register, logout}
