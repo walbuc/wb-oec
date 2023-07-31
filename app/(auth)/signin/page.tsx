@@ -53,12 +53,13 @@ export default function InlineLogin() {
   const fields = getFieldsErrors(error)
   const formError = getFormError(error)
 
-  function handleSubmit(event: React.FormEvent<CustomForm>) {
+  async function handleSubmit(event: React.FormEvent<CustomForm>) {
     if (!error) {
       event.preventDefault()
       const email = event.currentTarget.email.value
       const password = event.currentTarget.password.value
-      run(signin({email, password})).then(() => router.replace('/home'))
+      await run(signin({email, password}))
+      router.push('/home')
     }
   }
 

@@ -1,5 +1,4 @@
 import {NextApiRequest, NextApiResponse} from 'next'
-import {db} from '@/lib/db'
 import {serialize} from 'cookie'
 
 export default async function logout(
@@ -10,7 +9,7 @@ export default async function logout(
     'Set-Cookie',
     serialize(process.env.COOKIE_NAME!, '', {
       httpOnly: true,
-      path: '/home',
+      path: '/',
       maxAge: 60 * 60 * 24 * 7,
     }),
   )

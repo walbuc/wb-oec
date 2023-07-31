@@ -76,7 +76,7 @@ async function register(user: Pick<User, 'password' | 'email'>) {
     url: '/api/register',
     method: 'POST',
     body: user,
-    json: false,
+    json: true,
   })
 }
 
@@ -85,7 +85,7 @@ async function signin(user: Pick<User, 'password' | 'email'>) {
     url: '/api/signin',
     method: 'POST',
     body: user,
-    json: false,
+    json: true,
   })
 }
 

@@ -52,13 +52,12 @@ export default function InlineRegister() {
   const formError = getFormError(error)
   const router = useRouter()
 
-  function handleSubmit(event: React.FormEvent<CustomForm>) {
+  async function handleSubmit(event: React.FormEvent<CustomForm>) {
     event.preventDefault()
     const email = event.currentTarget.email.value
     const password = event.currentTarget.password.value
-    run(register({email, password})).then(() => {
-      router.replace('/home')
-    })
+    await run(register({email, password}))
+    router.push('/home')
   }
   return (
     <div>
