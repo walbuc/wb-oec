@@ -58,7 +58,7 @@ export default function InlineLogin() {
       event.preventDefault()
       const email = event.currentTarget.email.value
       const password = event.currentTarget.password.value
-      run(signin({email, password})).then(() => router.push('/home'))
+      run(signin({email, password})).then(() => router.replace('/home'))
     }
   }
 

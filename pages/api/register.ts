@@ -38,7 +38,7 @@ export default async function register(
       'Set-Cookie',
       serialize(process.env.COOKIE_NAME!, jwt, {
         httpOnly: true,
-        path: '/',
+        path: '/home',
         maxAge: 60 * 60 * 24 * 7,
       }),
     )

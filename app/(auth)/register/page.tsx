@@ -57,7 +57,7 @@ export default function InlineRegister() {
     const email = event.currentTarget.email.value
     const password = event.currentTarget.password.value
     run(register({email, password})).then(() => {
-      router.push('/home')
+      router.replace('/home')
     })
   }
   return (

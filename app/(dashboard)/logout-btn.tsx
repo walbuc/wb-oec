@@ -1,19 +1,18 @@
 'use client'
 import {logout} from '../actions'
 import {Button} from '@/components/forms'
-import {useRouter} from 'next/navigation'
+import {useRouter, redirect} from 'next/navigation'
 import {useTransition} from 'react'
 
 function Logout() {
   let [isPending, startTransition] = useTransition()
-  const router = useRouter()
 
   return (
     <Button
       onClick={() =>
         startTransition(async () => {
           await logout()
-          router.push('/signin')
+          redirect('/signin')
         })
       }
       size="sm"
