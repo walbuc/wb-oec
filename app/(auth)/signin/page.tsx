@@ -3,7 +3,6 @@ import {Button, Field} from '@/components/forms'
 import {useAsync} from '@/hooks/useAsync'
 import Link from 'next/link'
 import {signin} from '@/lib/client'
-
 import {ListOfErrors} from '@/components/forms'
 import {redirect, useRouter} from 'next/navigation'
 import {useEffect} from 'react'
@@ -69,50 +68,47 @@ export default function InlineLogin() {
   }
 
   return (
-    <div>
-      <div className="mx-auto w-full max-w-md px-8">
-        <form method="POST" name="login" onSubmit={handleSubmit}>
-          <Field
-            labelProps={{children: 'Email'}}
-            inputProps={{
-              name: 'email',
-              autoComplete: 'email',
-            }}
-            errors={fields.email}
-          />
+    <div className="mx-auto w-full max-w-md px-8">
+      <form method="POST" name="login" onSubmit={handleSubmit}>
+        <Field
+          labelProps={{children: 'Email'}}
+          inputProps={{
+            name: 'email',
+            autoComplete: 'email',
+          }}
+          errors={fields.email}
+        />
+        <Field
+          labelProps={{children: 'Password'}}
+          inputProps={{
+            name: 'password',
+            autoComplete: 'password',
+            type: 'password',
+          }}
+          errors={fields.password}
+        />
 
-          <Field
-            labelProps={{children: 'Password'}}
-            inputProps={{
-              name: 'password',
-              autoComplete: 'password',
-              type: 'password',
-            }}
-            errors={fields.password}
-          />
-          {formError}
-          <div className="flex flex-col items-center justify-between gap-6 pt-3">
-            <Button
-              className="w-full"
-              size="md"
-              variant="primary"
-              status={status === 'pending' ? 'pending' : status ?? 'idle'}
-              type="submit"
-              disabled={status !== 'idle'}
-            >
-              Log in
+        <div className="flex flex-col items-center justify-between gap-6 pt-3">
+          <Button
+            className="w-full"
+            size="md"
+            variant="primary"
+            status={status === 'pending' ? 'pending' : status ?? 'idle'}
+            type="submit"
+            disabled={status !== 'idle'}
+          >
+            Log in
+          </Button>
+          {error && (
+            <Button variant="secondary" size="md" onClick={reset}>
+              Reset
             </Button>
-            {error && (
-              <Button variant="secondary" size="md" onClick={reset}>
-                Reset
-              </Button>
-            )}
-          </div>
-        </form>
-        <div className="flex items-center justify-center gap-2 pt-6">
-          <span className="text-night-200">New here?</span>
-          <Link href="/register">Create an account</Link>
+          )}
         </div>
+      </form>
+      <div className="flex items-center justify-center gap-2 pt-6">
+        <span className="text-night-200">New here?</span>
+        <Link href="/register">Create an account</Link>
       </div>
     </div>
   )
