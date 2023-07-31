@@ -101,15 +101,9 @@ export function Field({
   errors?: ListOfErrors
   className?: string
 }) {
-  // const fallbackId = useId()
-  // const id = inputProps.id ?? fallbackId
-  // const errorId = errors?.length ? `${id}-error` : undefined
   return (
     <div className={clsx(styles.field, className)}>
       <input
-        //id={id}
-        //aria-invalid={errorId ? true : undefined}
-        //aria-describedby={errorId}
         placeholder=" "
         {...inputProps}
         className="h-16 w-full rounded-lg border border-night-400 bg-night-700 px-4 pt-4 text-body-xs caret-white outline-none focus:border-accent-purple disabled:bg-night-400"

@@ -1,5 +1,5 @@
 'use client'
-import {Button, Field} from '@/components/forms'
+import {Button, ButtonLink, Field} from '@/components/forms'
 import {useAsync} from '@/hooks/useAsync'
 import {register} from '@/lib/client'
 import {useRouter} from 'next/navigation'
@@ -50,6 +50,7 @@ export default function InlineRegister() {
   const {error, run, status, reset} = useAsync()
   const fields = getFieldsErrors(error)
   const formError = getFormError(error)
+  const success = status === 'success'
   const router = useRouter()
 
   async function handleSubmit(event: React.FormEvent<CustomForm>) {
@@ -96,6 +97,11 @@ export default function InlineRegister() {
               <Button variant="secondary" size="md" onClick={reset}>
                 Reset
               </Button>
+            )}
+            {success && (
+              <ButtonLink size="sm" variant="primary" href="/home">
+                Go to Dashboard!
+              </ButtonLink>
             )}
           </div>
         </form>

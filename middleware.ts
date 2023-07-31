@@ -36,6 +36,10 @@ export default async function middleware(req: NextRequest) {
 
   try {
     await verifyJWT(jwt.value)
+    if (pathname === '/') {
+      req.nextUrl.pathname = '/home'
+      return NextResponse.redirect(req.nextUrl)
+    }
     return NextResponse.next()
   } catch (e) {
     req.nextUrl.pathname = '/signin'
