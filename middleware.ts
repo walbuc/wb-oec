@@ -26,7 +26,7 @@ export default async function middleware(req: NextRequest) {
   ) {
     return NextResponse.next()
   }
-  //we validate here if we have alrearya token in the coockie session
+  //we validate here if we have alrearya token in the cookie session
   const jwt = req.cookies.get('__cookie_custom_name')
   // go away
   if (!jwt) {
@@ -37,6 +37,10 @@ export default async function middleware(req: NextRequest) {
   try {
     await verifyJWT(jwt.value)
     // here you go
+    if (pathname === '/') {
+      req.nextUrl.pathname = '/home'
+      return NextResponse.redirect(req.nextUrl)
+    }
     return NextResponse.next()
   } catch (e) {
     console.error(e)

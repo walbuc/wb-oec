@@ -1,7 +1,7 @@
 import {Spacer} from '@/components/spacer'
 import {Suspense} from 'react'
 import Countries from './countries'
-
+import CountrySearchCombobox from '@/components/country-combobox'
 export default function Home({
   searchParams,
 }: {
@@ -19,7 +19,15 @@ export default function Home({
         </div>
         <Spacer size="sm" />
         <div className="container m-auto mt-12">
-          <Suspense fallback="Loading data...">
+          <Suspense
+            fallback={
+              <CountrySearchCombobox
+                placeholder="Search for a country"
+                itemsInitial={[]}
+                showSpinner={true}
+              />
+            }
+          >
             <Countries />
           </Suspense>
         </div>
