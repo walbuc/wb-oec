@@ -34,7 +34,6 @@ export default async function Trade({id, name, year}: TradeProps) {
           <Link href="/home">Go Back</Link>
         </div>
       </div>
-
       <Spacer size="4xs" />
       <div className="relative flex h-full flex-wrap gap-7">
         <div className="h-full min-w-[400px] flex-1">
