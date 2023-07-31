@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import {PropsWithChildren} from 'react'
 import '@/styles/globals.css'
 import {Spacer} from '@/components/spacer'
@@ -14,7 +13,7 @@ export default function DashboardRootLayout({children}: PropsWithChildren) {
           </p>
         </div>
         <Spacer size="xs" />
-        {children}
+        <div>{children}</div>
       </div>
     </div>
   )

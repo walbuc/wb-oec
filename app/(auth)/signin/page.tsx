@@ -69,7 +69,7 @@ export default function InlineLogin() {
 
   return (
     <div className="mx-auto w-full max-w-md px-8">
-      <form method="POST" name="login" onSubmit={handleSubmit}>
+      <form name="login" onSubmit={handleSubmit}>
         <Field
           labelProps={{children: 'Email'}}
           inputProps={{
@@ -78,6 +78,7 @@ export default function InlineLogin() {
           }}
           errors={fields.email}
         />
+
         <Field
           labelProps={{children: 'Password'}}
           inputProps={{
