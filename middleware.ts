@@ -27,8 +27,11 @@ export default async function middleware(req: NextRequest) {
 
   const jwt = req.cookies.get('__cookie_custom_name')
 
-  if (!jwt) {
+  if (!jwt && pathname.startsWith('/signin')) {
     return NextResponse.rewrite(new URL('/signin', req.url))
+  }
+  if (!jwt && pathname.startsWith('/register')) {
+    return NextResponse.rewrite(new URL('/register', req.url))
   }
 
   try {
