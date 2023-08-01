@@ -1,6 +1,6 @@
 describe('Home Navigation ', () => {
   it('should navigate to the sign in page for user without session', () => {
-    cy.visit('/home')
+    cy.visit('/')
     cy.findByText(/oec/i)
     const link = cy.findByRole('link', {name: /oec data/i})
     link.findByText(/data/i)
