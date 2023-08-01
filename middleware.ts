@@ -1,6 +1,7 @@
 import {NextResponse} from 'next/server'
 import type {NextRequest} from 'next/server'
 import {jwtVerify} from 'jose'
+
 const PUBLIC_FILE = /\.(.*)$/
 
 const verifyJWT = async (jwt: string) => {
@@ -29,19 +30,16 @@ export default async function middleware(req: NextRequest) {
   const jwt = req.cookies.get('__cookie_custom_name')
 
   if (!jwt) {
-    req.nextUrl.pathname = '/signin'
-    return NextResponse.redirect(req.nextUrl)
+    return NextResponse.redirect(new URL('/signin', req.url))
   }
 
   try {
     await verifyJWT(jwt.value)
     if (pathname === '/') {
-      req.nextUrl.pathname = '/home'
-      return NextResponse.redirect(req.nextUrl)
+      return NextResponse.redirect(new URL('/home', req.url))
     }
     return NextResponse.next()
   } catch (e) {
-    req.nextUrl.pathname = '/signin'
-    return NextResponse.redirect(req.nextUrl)
+    return NextResponse.redirect(new URL('/signin', req.url))
   }
 }
