@@ -34,6 +34,10 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.rewrite(new URL('/register', req.url))
   }
 
+  if (!jwt) {
+    return NextResponse.rewrite(new URL('/signin', req.url))
+  }
+
   try {
     await verifyJWT(jwt.value)
     if (pathname === '/') {
