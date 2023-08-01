@@ -20,8 +20,6 @@ export default async function middleware(req: NextRequest) {
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/static') ||
-    pathname.startsWith('/signin') ||
-    pathname.startsWith('/register') ||
     PUBLIC_FILE.test(pathname)
   ) {
     return NextResponse.next()
@@ -30,12 +28,15 @@ export default async function middleware(req: NextRequest) {
   const jwt = req.cookies.get('__cookie_custom_name')
 
   if (!jwt) {
-    return NextResponse.redirect(new URL('/signin', req.url))
+    return NextResponse.rewrite(new URL('/signin', req.url))
   }
 
   try {
     await verifyJWT(jwt.value)
     if (pathname === '/') {
+      return NextResponse.redirect(new URL('/home', req.url))
+    }
+    if (pathname === '/signin' || pathname === '/register') {
       return NextResponse.redirect(new URL('/home', req.url))
     }
     return NextResponse.next()
