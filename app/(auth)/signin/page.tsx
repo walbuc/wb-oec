@@ -52,7 +52,6 @@ export default function InlineLogin() {
   const {error, run, status, reset} = useAsync()
   const router = useRouter()
   const fields = getFieldsErrors(error)
-  const success = status === 'success'
   const formError = getFormError(error)
 
   useEffect(() => {
@@ -89,7 +88,7 @@ export default function InlineLogin() {
           }}
           errors={fields.password}
         />
-
+        {formError && formError}
         <div className="flex flex-col items-center justify-between gap-6 pt-3">
           <Button
             className="w-full"
@@ -105,11 +104,6 @@ export default function InlineLogin() {
             <Button variant="secondary" size="md" onClick={reset}>
               Reset
             </Button>
-          )}
-          {success && (
-            <ButtonLink size="sm" variant="primary" href="/home">
-              Go to Dashboard!
-            </ButtonLink>
           )}
         </div>
       </form>
