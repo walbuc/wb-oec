@@ -34,7 +34,6 @@ export const validateJWT = async (jwt: string) => {
 // Getting the JWT from cookies:
 export const getUserFromCookie = async (cookies: ReadonlyRequestCookies) => {
   const jwt = cookies.get(process.env.COOKIE_NAME!)
-  // by the time here we will  have a jwt token. no nee to validate
   if (!jwt) {
     redirect('/signin')
   } else {
